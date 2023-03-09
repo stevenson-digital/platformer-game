@@ -1,7 +1,4 @@
-interface Coordinates {
-  x: number
-  y: number
-}
+import { Coordinates } from './types'
 
 interface PlayerProps {
   canvas: HTMLCanvasElement
@@ -51,11 +48,12 @@ export class Player {
   update() {
     this.draw()
 
+    this.position.x += this.velocity.x
     this.position.y += this.velocity.y
 
+    // Stop player at bottom of canvas
     const bottomOfPlayer = this.position.y + this.height
 
-    // Stop player at bottom of canvas
     if (bottomOfPlayer + this.velocity.y <= this.canvas.height) {
       this.velocity.y += this.gravity
     } else {
